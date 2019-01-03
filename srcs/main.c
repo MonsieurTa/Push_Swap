@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 17:44:56 by wta               #+#    #+#             */
-/*   Updated: 2019/01/01 18:31:48 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/03 04:11:23 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,22 @@ void	print_list(t_lst *lst)
 	}
 }
 
+void	print_tab(int *tab, int len)
+{
+	for (int i = 0 ; i < len; i++)
+		ft_printf("tab value %d\n", tab[i]);
+}
+
 int	main(int ac, char **av)
 {
-	t_inttab	inttab;
+	t_tab	tab;
+	t_lst	lst;	
+	t_lst	stack;
 
-	if ((inttab.len = read_args(ac, av, &inttab)) != 0)
-	{
-		quicksort_tab(inttab.tab, 0, inttab.len - 1);
-		for (int i = 0 ; i < inttab.len; i++)
-			ft_printf("value = %d\n", inttab.tab[i]);
-	}
+	init_lst(&stack);
+	if ((tab.len = read_args(ac, av, &tab, &lst)) != 0)
+		quicksort_tab(tab.tab, 0, tab.len - 1);
+	insertion_sort(&lst, &stack, &tab);
+	print_list(&lst);
 	return (0);
 }

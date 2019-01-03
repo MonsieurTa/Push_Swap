@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/01 16:18:58 by wta               #+#    #+#             */
-/*   Updated: 2019/01/01 19:28:45 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/02 20:18:10 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,31 @@ int	check_arg(char *str, int *value)
 	return (ret);
 }
 
-int	read_args(int ac, char **av, t_inttab *inttab)
+int	build_lst(t_lst *lst, int value)
+{
+	t_node	*node;
+
+	if ((node = newnode(value)) != NULL)
+		pushback(lst, node);
+	return (node != NULL);
+}
+
+int	read_args(int ac, char **av, t_tab *tab, t_lst *lst)
 {
 	int	idx;
 
 	idx = 1;
 	if (ac > 1)
 	{
-		if ((inttab->tab = ft_memalloc(sizeof(int) * (ac - 1))) != NULL)
+		if ((tab->tab = ft_memalloc(sizeof(int) * (ac - 1))) != NULL)
 		{
 			while (idx < ac)
 			{
-				if (check_arg(av[idx], &inttab->tab[idx - 1]) == 0)
+				if (check_arg(av[idx], &tab->tab[idx - 1]) == 0
+				|| build_lst(lst, tab->tab[idx - 1]) == 0)
 				{
-					free(inttab->tab);
+					rm_lst(lst);
+					free(tab->tab);
 					return (0);
 				}
 				idx++;
