@@ -6,13 +6,14 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 14:13:22 by wta               #+#    #+#             */
-/*   Updated: 2019/01/03 04:10:55 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/03 22:16:10 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "operations.h"
 #include <stdlib.h>
+#include <unistd.h>
 
 int		unsorted_from_min(t_lst *lst, int min)
 {
@@ -190,37 +191,4 @@ void	insertion_sort(t_lst *lst, t_lst *stack, t_tab *tab)
 		}
 	}
 	nearest_rotation(lst, tab, tab->tab[0]);
-}
-
-void	ft_swap(int *a, int *b)
-{
-	int	tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
-void	quicksort_tab(int *tab, int start, int end)
-{
-	int	pivot;
-	int	split;
-	int	idx;
-
-	if (start >= end)
-		return ;
-	pivot = tab[end];
-	split = start;
-	idx = start;
-	while (idx <= end)
-	{
-		if (tab[idx] <= pivot)
-		{
-			ft_swap(&tab[split], &tab[idx]);
-			split++;
-		}
-		idx++;
-	}
-	quicksort_tab(tab, start, split - 2);
-	quicksort_tab(tab, split, end);
 }

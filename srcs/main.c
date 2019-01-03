@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 17:44:56 by wta               #+#    #+#             */
-/*   Updated: 2019/01/03 04:11:23 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/03 22:12:10 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "operations.h"
 #include "push_swap.h"
 #include "read.h"
+#include "tab_sort.h"
+#include "sort.h"
 
 void	print_list(t_lst *lst)
 {
@@ -24,7 +26,7 @@ void	print_list(t_lst *lst)
 	idx = 0;
 	while (idx < lst->len)
 	{
-		ft_printf("idx = %d --- value = %d\n", idx, lst->head->value);
+		ft_printf("%d\n", lst->head->value);
 		lst->head = lst->head->next;
 		idx++;
 	}
@@ -38,14 +40,15 @@ void	print_tab(int *tab, int len)
 
 int	main(int ac, char **av)
 {
-	t_tab	tab;
-	t_lst	lst;	
-	t_lst	stack;
+	t_tab		tab;
+	t_stacks	stacks;
 
-	init_lst(&stack);
-	if ((tab.len = read_args(ac, av, &tab, &lst)) != 0)
+	init_lst(&stacks.a);
+	init_lst(&stacks.b);
+	if ((tab.len = read_args(ac, av, &tab, &stacks.a)) != 0)
 		quicksort_tab(tab.tab, 0, tab.len - 1);
-	insertion_sort(&lst, &stack, &tab);
-	print_list(&lst);
+//	print_tab(tab.tab, tab.len);
+	insertion_sort(&stacks.a, &stacks.b, &tab);
+//	quicksort(&stacks, &tab, 0, tab.len - 1);
 	return (0);
 }

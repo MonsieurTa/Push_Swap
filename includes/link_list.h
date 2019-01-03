@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 15:02:52 by wta               #+#    #+#             */
-/*   Updated: 2018/12/30 17:42:48 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/03 18:56:58 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ typedef struct	s_lst
 	t_node	*tail;
 	int		len;
 }				t_lst;
+
+typedef struct	s_stacks
+{
+	t_lst	a;
+	t_lst	b;
+}				t_stacks;
 
 
 t_node	*newnode(int value);
