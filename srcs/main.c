@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 17:44:56 by wta               #+#    #+#             */
-/*   Updated: 2019/01/03 22:12:10 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/04 06:28:22 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ int	main(int ac, char **av)
 	if ((tab.len = read_args(ac, av, &tab, &stacks.a)) != 0)
 		quicksort_tab(tab.tab, 0, tab.len - 1);
 //	print_tab(tab.tab, tab.len);
-	insertion_sort(&stacks.a, &stacks.b, &tab);
+	selection_sort(&stacks);
+//	print_list(&stacks.a);
+//	insertion_sort(&stacks.a, &stacks.b, &tab);
 //	quicksort(&stacks, &tab, 0, tab.len - 1);
 	return (0);
 }
