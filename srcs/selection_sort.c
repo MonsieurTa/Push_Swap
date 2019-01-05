@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 00:49:22 by wta               #+#    #+#             */
-/*   Updated: 2019/01/05 03:59:31 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/05 19:46:53 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,22 @@ void	move_stacks(t_lst *a, t_lst *b, int len, char c)
 	if (len > 0)
 	{
 		while (len-- > 0)
-			rot((c == 'b') ? b : a, c);
+		{
+			if (c == 'a' || c == 'b')
+				rot((c == 'b') ? b : a, c);
+			else if (c == 'x')
+				rrot(a, b, "rr");
+		}
 	}
 	else
 	{
 		while (len++ < 0)
-			rev_rot((c == 'b') ? b : a, c);
+		{
+			if (c == 'a' || c == 'b')
+				rev_rot((c == 'b') ? b : a, c);
+			else if (c == 'x')
+				rrev_rot(a, b,  "rrr");
+		}
 	}
 }
 
@@ -136,75 +146,106 @@ int	best_a_rot(t_lst *a, t_lst *b, int value)
 
 int		opti_rot(t_lst *stack, int rot)
 {
-	if (rot >= stack->len / 2)
+	if (rot > stack->len / 2)
 		rot = rot - stack->len;
 	return (rot);
 }
 
-void	get_two_rot(t_lst *a, t_lst *b, int *a_rot, int *b_rot)
+void	set_opti_rot(t_stacks *stacks, char *str, int i, int j)
+{
+	int	*ptr_a;
+	int	*ptr_b;
+	int	rot_type;
+
+	rot_type = ft_strequ(str, "double");
+	ptr_a = (rot_type == 1) ? &stacks->rrr_rot : &stacks->a_rot;
+	ptr_b = (rot_type == 1) ? &stacks->rb_rot : &stacks->b_rot;
+	if (*ptr_a == -1 && *ptr_b == -1)
+	{
+		*ptr_a = (rot_type == 1) ? i : opti_rot(&stacks->a, i);
+		*ptr_b = opti_rot(&stacks->b, j);
+	}
+	else if (ft_abs(opti_rot(&stacks->a, i)) + ft_abs(
+				opti_rot(&stacks->b, j)) < ft_abs(*ptr_a) + ft_abs(*ptr_b))
+	{
+		*ptr_a = (rot_type == 1) ? i : opti_rot(&stacks->a, i);
+		*ptr_b = opti_rot(&stacks->b, j);
+	}
+}
+
+void	get_double_rot(t_stacks *stacks)
+{
+	t_node	*node_a;
+	t_node	*node_b;
+	t_node	*tmp_b;
+	int		i;
+	int		j;
+
+	node_a = stacks->a.head;
+	node_b = stacks->b.head;
+	i = -1;
+	while (++i < stacks->a.len)
+	{
+		tmp_b = node_b;
+		j = -1;
+		while (++j < stacks->b.len)
+		{
+			if (fit_in_b(node_a->value, tmp_b) == 1)
+				set_opti_rot(stacks, "double", i, j);
+			tmp_b = tmp_b->next;
+		}
+		node_a = node_a->next;
+		node_b = node_b->next;
+	}
+}
+
+void	get_two_rot(t_stacks *stacks)
 {
 	t_node	*node_a;
 	t_node	*node_b;
 	int		i;
 	int		j;
 
-	node_a = a->head;
+	node_a = stacks->a.head;
 	i = -1;
-	while (++i < a->len)
+	while (++i < stacks->a.len)
 	{
 		j = -1;
-		node_b = b->head;
-		while (++j < b->len)
+		node_b = stacks->b.head;
+		while (++j < stacks->b.len)
 		{
 			if (fit_in_b(node_a->value, node_b) == 1)
-			{
-				if (*a_rot == -1 && *b_rot == -1)
-				{
-					*a_rot = opti_rot(a, i);
-					*b_rot = opti_rot(b, j);
-				}
-				else if (ft_abs(opti_rot(a, i)) + ft_abs(opti_rot(b, j)) < ft_abs(*a_rot) + ft_abs(*b_rot))
-				{
-					*a_rot = opti_rot(a, i);
-					*b_rot = opti_rot(b, j);
-				}
-			}
+				set_opti_rot(stacks, "single", i, j);
 			node_b = node_b->next;
 		}
 		node_a = node_a->next;
 	}
-	move_stacks(a, b, *a_rot, 'a');
-	move_stacks(a, b, *b_rot, 'b');
 }
 
-void	two_stack_rot(t_lst *a, t_lst *b)
+void	two_stack_rot(t_stacks *stacks)
 {
-	int	a_rot;
-	int	b_rot;
-
-	a_rot = -1;
-	b_rot = -1;
-	get_two_rot(a, b, &a_rot, &b_rot);
-}
-
-void	one_stack_rot(t_lst *a, t_lst *b)
-{
-	int	dist_b;
-	int	dist_a;
-
-	dist_b = best_b_rot(b, a->head->value);
-	dist_a = best_a_rot(a, b, b->head->value);
-	if (dist_b < dist_a)
-		move_stacks(a, b, dist_b, 'b');
+	*(&stacks->rrr_rot) = -1;
+	*(&stacks->rb_rot) = -1;
+	*(&stacks->a_rot) = -1;
+	*(&stacks->b_rot) = -1;
+	get_double_rot(stacks);
+	get_two_rot(stacks);
+	if (ft_abs(stacks->rrr_rot) + ft_abs(stacks->rb_rot) < ft_abs(stacks->a_rot) + ft_abs(stacks->b_rot))
+	{
+		move_stacks(&stacks->a, &stacks->b, stacks->rrr_rot, 'x');
+		move_stacks(&stacks->a, &stacks->b, stacks->rb_rot, 'b');
+	}
 	else
-		move_stacks(a, b, dist_a, 'a');
+	{
+		move_stacks(&stacks->a, &stacks->b, stacks->a_rot, 'a');
+		move_stacks(&stacks->a, &stacks->b, stacks->b_rot, 'b');
+	}
 }
 
-void	insert(t_lst *a, t_lst *b)
+void	insert(t_stacks *stacks)
 {
-	two_stack_rot(a, b);
-//	one_stack_rot(a, b);
-	push_lst(a, b, "a to b", 'b');
+	two_stack_rot(stacks);
+	push_lst(&stacks->a, &stacks->b, "a to b", 'b');
 }
 
 void	small_sort(t_lst *b)
@@ -229,11 +270,9 @@ void	selection_sort(t_stacks *stacks)
 		push_lst(&stacks->a, &stacks->b, "a to b", 'b');
 	small_sort(&stacks->b);
 	while (stacks->a.len > 0)
-		insert(&stacks->a, &stacks->b);
-//	print_list(&stacks->a);
-//	print_list(&stacks->b);
-//	smallest_rotation(&stacks->a, &stacks->b);
-	move_stacks(&stacks->a, &stacks->b, best_b_rot(&stacks->b, get_max(&stacks->b)), 'b');
+		insert(stacks);
+	move_stacks(&stacks->a, &stacks->b, best_b_rot(&stacks->b,
+		get_max(&stacks->b)), 'b');
 	while (stacks->b.len > 0)
 		push_lst(&stacks->a, &stacks->b, "b to a", 'a');
 }

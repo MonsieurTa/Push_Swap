@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 16:48:26 by wta               #+#    #+#             */
-/*   Updated: 2019/01/05 04:12:01 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/05 17:48:39 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@
 #include "push_swap.h"
 #include "operations.h"
 
-void	init_stacks(t_stacks *stacks)
-{
-	init_lst(&stacks->a);
-	init_lst(&stacks->b);
-}
+
 
 int	do_op(t_stacks *stacks)
 {

@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 17:37:43 by wta               #+#    #+#             */
-/*   Updated: 2019/01/05 04:12:19 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/05 18:10:31 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include "link_list.h"
 #include "push_swap.h"
 #include "operations.h"
+
+void	init_stacks(t_stacks *stacks)
+{
+	init_lst(&stacks->a);
+	init_lst(&stacks->b);
+}
 
 void	ft_delsplit(char **split)
 {
@@ -65,9 +71,7 @@ void	print_list(t_lst *lst, char c)
 	while (idx < lst->len)
 	{
 		c = 0;
-		while (c++ < lst->head->value)
-			ft_putchar('.');
-		ft_putchar('\n');
+		ft_printf("%d ", lst->head->value);
 		lst->head = lst->head->next;
 		idx++;
 	}
