@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 00:49:22 by wta               #+#    #+#             */
-/*   Updated: 2019/01/05 19:46:53 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/05 23:17:58 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,16 +248,31 @@ void	insert(t_stacks *stacks)
 	push_lst(&stacks->a, &stacks->b, "a to b", 'b');
 }
 
-void	small_sort(t_lst *b)
+void	small_sort(t_lst *lst, char c)
 {
-	while (is_sort_from_h(b) == 0)
+	if (c == 'b')
 	{
-		if (b->head->next->value > b->head->value)
-			swap(b, 'b');
-		else if (b->tail->value > b->head->value)
-			rev_rot(b, 'b');
-		else if (b->head->next->value < b->tail->value)
-			rev_rot(b, 'b');
+		while (is_sort_from_h(lst) == 0)
+		{
+			if (lst->head->next->value > lst->head->value)
+				swap(lst, 'b');
+			else if (lst->tail->value > lst->head->value)
+				rev_rot(lst, 'b');
+			else if (lst->head->next->value < lst->tail->value)
+				rev_rot(lst, 'b');
+		}
+	}
+	else
+	{
+		while (is_sort(lst) == 0)
+		{
+			if (lst->head->next->value < lst->head->value)
+				swap(lst, 'a');
+			else if (lst->tail->value < lst->head->value)
+				rev_rot(lst, 'a');
+			else if (lst->head->next->value > lst->tail->value)
+				rev_rot(lst, 'a');
+		}
 	}
 }
 
@@ -268,7 +283,7 @@ void	selection_sort(t_stacks *stacks)
 	i = 0;
 	while (i++ < 3)
 		push_lst(&stacks->a, &stacks->b, "a to b", 'b');
-	small_sort(&stacks->b);
+	small_sort(&stacks->b, 'b');
 	while (stacks->a.len > 0)
 		insert(stacks);
 	move_stacks(&stacks->a, &stacks->b, best_b_rot(&stacks->b,
