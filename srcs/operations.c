@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 15:28:31 by wta               #+#    #+#             */
-/*   Updated: 2019/01/03 22:15:46 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/04 23:33:07 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "link_list.h"
 #include "operations.h"
 
-void	swap(t_lst *lst)
+void	swap(t_lst *lst, char c)
 {
 	t_node	*node;
 	int		tmp;
@@ -27,11 +27,12 @@ void	swap(t_lst *lst)
 		tmp = node->value;
 		node->value = node->next->value;
 		node->next->value = tmp;
-		ft_printf("sa\n");
+		if (c == 'a' || c == 'b')
+			ft_printf("s%c\n", c);
 	}
 }
 
-void	push_lst(t_lst *a, t_lst *b, char *str)
+void	push_lst(t_lst *a, t_lst *b, char *str, char c)
 {
 	t_node	*node;
 
@@ -42,7 +43,8 @@ void	push_lst(t_lst *a, t_lst *b, char *str)
 			if ((node = pop_front(a)) != NULL)
 			{
 				pushfront(b, node);
-				ft_printf("pb\n");
+				if (c == 'b')
+					ft_printf("p%c\n", c);
 			}
 		}
 	}
@@ -53,28 +55,55 @@ void	push_lst(t_lst *a, t_lst *b, char *str)
 			if ((node = pop_front(b)) != NULL)
 			{
 				pushfront(a, node);
-				ft_printf("pa\n");
+				if (c == 'a')
+					ft_printf("p%c\n", c);
 			}
 		}
 	}
 }
 
-void	rotate(t_lst *lst)
+void	rot(t_lst *lst, char c)
 {
 	if (lst && lst->len >= 2)
 	{
 		lst->head = lst->head->next;
 		lst->tail = lst->tail->next;
-		ft_printf("ra\n");
+		if (c == 'a' || c == 'b')
+			ft_printf("r%c\n", c);
 	}
 }
 
-void	reverse_rotate(t_lst *lst)
+void	rev_rot(t_lst *lst, char c)
 {
 	if (lst && lst->len >= 2)
 	{
 		lst->head = lst->head->prev;
 		lst->tail = lst->tail->prev;
-		ft_printf("rra\n");
+		if (c == 'a' || c == 'b')
+			ft_printf("rr%c\n", c);
 	}
+}
+
+void	sswap(t_lst *a, t_lst *b, char *str)
+{
+	swap(a, 0);
+	swap(b, 0);
+	if (ft_strequ(str, "ss"))
+		ft_printf("ss\n");
+}
+
+void	rrot(t_lst *a, t_lst *b, char *str)
+{
+	rot(a, 0);
+	rot(b, 0);
+	if (ft_strequ(str, "rr"))
+		ft_printf("rr\n");
+}
+
+void	rrev_rot(t_lst *a, t_lst *b, char *str)
+{
+	rev_rot(a, 0);
+	rev_rot(b, 0);
+	if (ft_strequ(str, "rrr"))
+		ft_printf("rrr\n");
 }

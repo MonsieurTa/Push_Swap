@@ -6,12 +6,13 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/01 16:18:58 by wta               #+#    #+#             */
-/*   Updated: 2019/01/02 20:18:10 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/04 23:18:28 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/includes/libft.h"
 #include "read.h"
+#include "push_swap.h"
 
 int	check_arg(char *str, int *value)
 {
@@ -45,26 +46,22 @@ int	build_lst(t_lst *lst, int value)
 	return (node != NULL);
 }
 
-int	read_args(int ac, char **av, t_tab *tab, t_lst *lst)
+int	read_args(int ac, char **av, t_lst *lst)
 {
-	int	idx;
+	char	**split;
+	int		idx;
 
 	idx = 1;
 	if (ac > 1)
 	{
-		if ((tab->tab = ft_memalloc(sizeof(int) * (ac - 1))) != NULL)
+		while (idx < ac)
 		{
-			while (idx < ac)
-			{
-				if (check_arg(av[idx], &tab->tab[idx - 1]) == 0
-				|| build_lst(lst, tab->tab[idx - 1]) == 0)
-				{
-					rm_lst(lst);
-					free(tab->tab);
-					return (0);
-				}
-				idx++;
-			}
+			if ((split = ft_strsplit(av[idx], ' ')) != NULL
+			&& add_to_stack(lst, split) == 0)
+				return (0);
+			else if (split == NULL)
+				return (rm_lst(lst));
+			idx++;
 		}
 	}
 	return (idx - 1);

@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 18:25:41 by wta               #+#    #+#             */
-/*   Updated: 2018/12/30 20:11:38 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/04 22:27:46 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,17 @@ void	bubble_sort(t_lst *lst)
 		node = lst->head;
 		if (idx != lst->len - 1 && node->value > node->next->value)
 		{
-			swap(lst);
-			ft_printf("sa\n");
+			swap(lst, 'a');
 			if (idx > 0)
 			{
 				idx -= 1;
-				reverse_rotate(lst);
-				ft_printf("rra\n");
+				rev_rot(lst, 'a');
 			}
 		}
 		else
 		{
 			idx++;
-			rotate(lst);
-			ft_printf("ra\n");
+			rot(lst, 'a');
 		}
 	}
 }

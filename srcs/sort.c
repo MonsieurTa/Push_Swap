@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 14:13:22 by wta               #+#    #+#             */
-/*   Updated: 2019/01/03 22:16:10 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/04 22:30:19 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,11 @@ void	nearest_rotation(t_lst *lst, t_tab *tab, int value)
 		if (dr < dl)
 		{
 			while (dr-- > 0)
-				rotate(lst);
+				rot(lst, 'b');
 		}
 		else
 			while (dl-- > 0)
-				reverse_rotate(lst);
+				rev_rot(lst, 'b');
 	}
 }
 
@@ -130,13 +130,13 @@ void	find_unsorted(t_lst *lst, t_tab *tab)
 		if (correct_place(lst, tab, node) == 0)
 		{
 			while (i-- > 0)
-				rotate(lst);
+				rot(lst, 'b');
 			return ;
 		}
 		else if (correct_place(lst, tab, prev) == 0)
 		{
 			while (i-- > 0)
-				reverse_rotate(lst);
+				rev_rot(lst, 'b');
 			return ;
 		}
 	}
@@ -163,16 +163,16 @@ int	pre_sort(t_lst *lst, t_tab *tab)
 {
 	if (lst->head->value == tab->tab[tab->len - 1]
 	&& lst->head->next->next->value == tab->tab[0])
-		swap(lst);
+		swap(lst, 'b');
 	else if (d_from_min(lst, lst->head->next, tab->tab[0]) - 1 == pos_in_tab(tab,
 	lst->head->next->value))
-		swap(lst);
+		swap(lst, 'b');
 	else if (d_from_min(lst, lst->tail, tab->tab[0]) + 1 == pos_in_tab(tab,
 	lst->tail->value))
-		rotate(lst);
+		rot(lst, 'b');
 	else if (d_from_min(lst, lst->head, tab->tab[0]) - 1 == pos_in_tab(tab,
 	lst->head->value))
-		reverse_rotate(lst);
+		rev_rot(lst, 'b');
 	else
 		return (0);
 	return (1);
@@ -185,9 +185,9 @@ void	insertion_sort(t_lst *lst, t_lst *stack, t_tab *tab)
 		if (pre_sort(lst, tab) == 0)
 		{
 			find_unsorted(lst, tab);
-			push_lst(lst, stack, "a to b");
+			push_lst(lst, stack, "a to b", 'b');
 			nearest_rotation(lst, tab, stack->head->value);
-			push_lst(lst, stack, "b to a");
+			push_lst(lst, stack, "b to a", 'a');
 		}
 	}
 	nearest_rotation(lst, tab, tab->tab[0]);

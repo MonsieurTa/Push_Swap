@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 15:07:22 by wta               #+#    #+#             */
-/*   Updated: 2018/12/30 17:42:13 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/04 17:59:11 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,20 +105,16 @@ t_node	*pop_front(t_lst *lst)
 	return (node);
 }
 
-void	rm_lst(t_lst *lst)
+int	rm_lst(t_lst *lst)
 {
 	t_node	*tmp;
+	int		idx;
 
-	if (lst->head != NULL)
+	while (lst->len > 0)
 	{
-		while (lst->head)
-		{
-			tmp = lst->head;
-			lst->head = lst->head->next;
-			tmp->next = NULL;
-			tmp->prev = NULL;
-			ft_memdel((void**)&tmp);
-			lst->len -= 1;
-		}
+		tmp = pop_front(lst);
+		free(tmp);
+		tmp = NULL;
 	}
+	return (0);
 }
