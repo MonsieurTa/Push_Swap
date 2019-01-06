@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 17:37:43 by wta               #+#    #+#             */
-/*   Updated: 2019/01/06 00:19:10 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 01:00:28 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,59 +21,7 @@ void	init_stacks(t_stacks *stacks)
 	init_lst(&stacks->b);
 }
 
-void	ft_delsplit(char **split)
-{
-	int		idx;
-
-	if (split)
-	{
-		idx = 0;
-		while (split[idx] != NULL)
-		{
-			free(split[idx]);
-			split[idx] = NULL;
-			idx++;
-		}
-		free(split);
-		split = NULL;
-	}
-}
-
-int	is_num(char *str)
-{
-	int	idx;
-
-	if (str)
-	{
-		idx = (str[0] == '-' || str[0] == '+') ? 1 : 0;
-		if (str[idx] == '\0')
-			return (0);
-		while (str[idx] >= '0' && str[idx] <= '9')
-			idx++;
-		if (str[idx == '\0'])
-			return (1);
-	}
-	return (0);
-}
-
-long long	ft_atoi_ll(char *str)
-{
-	long long	res;
-	char		sign;
-	int			i;
-
-	res = 0;
-	i = (str[0] == '-' | str[0] == '+') ? 1 : 0;
-	sign = (str[0] == '-') ? -1 : 1;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		res = (res * 10) + (str[i] - '0');
-		i++;
-	}
-	return (res * sign);
-}
-
-int	check_split(char **split)
+int		check_split(char **split)
 {
 	long long	value;
 	int			idx;
@@ -88,10 +36,10 @@ int	check_split(char **split)
 			return (0);
 		idx++;
 	}
-	return (1);
+	return (idx > 0);
 }
 
-int	is_in_list(t_lst *a, int value)
+int		is_in_list(t_lst *a, int value)
 {
 	t_node	*node;
 	int		i;
@@ -111,7 +59,7 @@ int	is_in_list(t_lst *a, int value)
 	return (0);
 }
 
-int	add_to_stack(t_lst *a, char **split)
+int		add_to_stack(t_lst *a, char **split)
 {
 	t_node	*node;
 	int		idx;
@@ -158,20 +106,4 @@ int		is_sort(t_lst *lst)
 		}
 	}
 	return (1);
-}
-
-void	print_list(t_lst *lst, char c)
-{
-	int	idx;
-
-	idx = 0;
-	ft_printf("%c STACK :\n", c);
-	while (idx < lst->len)
-	{
-		c = 0;
-		ft_printf("%d ", lst->head->value);
-		lst->head = lst->head->next;
-		idx++;
-	}
-	ft_printf("\n");
 }

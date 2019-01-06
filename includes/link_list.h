@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 15:02:52 by wta               #+#    #+#             */
-/*   Updated: 2019/01/05 18:37:38 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 01:21:06 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ typedef struct	s_stacks
 	int		b_rot;
 }				t_stacks;
 
-t_node	*newnode(int value);
-void	init_lst(t_lst *lst);
-void	pushfront(t_lst *lst, t_node *node);
-void	pushback(t_lst *lst, t_node *node);
-t_node	*pop_front(t_lst *lst);
-int		rm_lst(t_lst *lst);
-void	init_stacks(t_stacks *stacks);
+t_node			*newnode(int value);
+t_node			*pop_front(t_lst *lst);
+void			init_lst(t_lst *lst);
+void			pushfront(t_lst *lst, t_node *node);
+void			pushback(t_lst *lst, t_node *node);
+int				rm_lst(t_lst *lst);
+void			init_stacks(t_stacks *stacks);
 
 #endif

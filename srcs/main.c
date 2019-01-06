@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 17:44:56 by wta               #+#    #+#             */
-/*   Updated: 2019/01/05 23:41:14 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 00:57:11 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@
 #include "read.h"
 #include "tab_sort.h"
 #include "sort.h"
-
-void	print_tab(int *tab, int len)
-{
-	for (int i = 0 ; i < len; i++)
-		ft_printf("tab value %d\n", tab[i]);
-}
 
 int	main(int ac, char **av)
 {

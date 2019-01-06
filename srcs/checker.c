@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 16:48:26 by wta               #+#    #+#             */
-/*   Updated: 2019/01/05 23:19:30 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 01:18:20 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,17 @@ int		check_stacks(t_stacks *stacks)
 	return (0);
 }
 
-int	main(int ac, char **av)
+void	check_all(t_stacks *stacks, int ret)
+{
+	if (ret == 0 || do_op(stacks) == 0)
+		ft_putstr_fd("Error\n", 2);
+	else if (check_stacks(stacks) == 0)
+		ft_printf("KO\n");
+	rm_lst(&stacks->a);
+	rm_lst(&stacks->b);
+}
+
+int		main(int ac, char **av)
 {
 	t_stacks	stacks;
 	char		**split;
@@ -50,12 +60,7 @@ int	main(int ac, char **av)
 				ret = 0;
 			idx++;
 		}
-		if (ret == 0 || do_op(&stacks) == 0)
-			ft_putstr_fd("Error\n", 2);
-		else if (check_stacks(&stacks) == 0)
-			ft_printf("KO\n");
-		rm_lst(&stacks.a);
-		rm_lst(&stacks.b);
+		check_all(&stacks, ret);
 	}
 	return (0);
 }
