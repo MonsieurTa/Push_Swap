@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 01:05:33 by wta               #+#    #+#             */
-/*   Updated: 2019/01/06 01:08:42 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 03:10:03 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "operations.h"
 #include "push_swap.h"
 
-int		fit_in_b(int value_a, t_node *node_b)
+int		fit_in(int value_a, t_node *node_b)
 {
 	if (node_b->prev->value < node_b->value)
 	{
@@ -41,7 +41,7 @@ int		best_a_rot(t_lst *a, t_lst *b, int value)
 	len = 0;
 	node = a->head;
 	mid = a->len / 2;
-	while (len < a->len && fit_in_b(node->value, b->head) == 0)
+	while (len < a->len && fit_in(node->value, b->head) == 0)
 	{
 		node = node->next;
 		len += 1;
@@ -69,12 +69,7 @@ void	set_opti_rot(t_stacks *stacks, char *str, int i, int j)
 	rot_type = ft_strequ(str, "double");
 	ptr_a = (rot_type == 1) ? &stacks->rrr_rot : &stacks->a_rot;
 	ptr_b = (rot_type == 1) ? &stacks->rb_rot : &stacks->b_rot;
-	if (*ptr_a == -1 && *ptr_b == -1)
-	{
-		*ptr_a = (rot_type == 1) ? i : opti_rot(&stacks->a, i);
-		*ptr_b = opti_rot(&stacks->b, j);
-	}
-	else if (ft_abs(opti_rot(&stacks->a, i)) + ft_abs(
+	if (ft_abs(opti_rot(&stacks->a, i)) + ft_abs(
 				opti_rot(&stacks->b, j)) < ft_abs(*ptr_a) + ft_abs(*ptr_b))
 	{
 		*ptr_a = (rot_type == 1) ? i : opti_rot(&stacks->a, i);

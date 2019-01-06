@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 00:49:22 by wta               #+#    #+#             */
-/*   Updated: 2019/01/06 01:06:48 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 03:09:12 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	get_double_rot(t_stacks *stacks)
 		j = -1;
 		while (++j < stacks->b.len)
 		{
-			if (fit_in_b(node_a->value, tmp_b) == 1)
+			if (fit_in(node_a->value, tmp_b) == 1)
 				set_opti_rot(stacks, "double", i, j);
 			tmp_b = tmp_b->next;
 		}
@@ -57,7 +57,7 @@ void	get_two_rot(t_stacks *stacks)
 		node_b = stacks->b.head;
 		while (++j < stacks->b.len)
 		{
-			if (fit_in_b(node_a->value, node_b) == 1)
+			if (fit_in(node_a->value, node_b) == 1)
 				set_opti_rot(stacks, "single", i, j);
 			node_b = node_b->next;
 		}
@@ -67,10 +67,10 @@ void	get_two_rot(t_stacks *stacks)
 
 void	two_stack_rot(t_stacks *stacks)
 {
-	*(&stacks->rrr_rot) = -1;
-	*(&stacks->rb_rot) = -1;
-	*(&stacks->a_rot) = -1;
-	*(&stacks->b_rot) = -1;
+	*(&stacks->rrr_rot) = stacks->a.len;
+	*(&stacks->rb_rot) = stacks->b.len;
+	*(&stacks->a_rot) = stacks->a.len;
+	*(&stacks->b_rot) = stacks->b.len;
 	get_double_rot(stacks);
 	get_two_rot(stacks);
 	if (ft_abs(stacks->rrr_rot) + ft_abs(stacks->rb_rot) < ft_abs(
