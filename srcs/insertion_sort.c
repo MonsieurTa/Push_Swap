@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 01:26:07 by wta               #+#    #+#             */
-/*   Updated: 2019/01/06 05:00:13 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 07:18:35 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,23 @@ int		get_min(t_lst *a)
 	return (min);
 }
 
+int		get_min_rot(t_lst *a, int min)
+{
+	t_node	*node;
+	int		i;
+
+	node = a->head;
+	i = 0;
+	while (i < a->len)
+	{
+		if (node->value == min)
+			break ;
+		node = node->next;
+		i++;
+	}
+	return (opti_rot(a, i));
+}
+
 void	insertion_sort(t_stacks *stacks)
 {
 	while (stacks->a.len > 3)
@@ -91,6 +108,6 @@ void	insertion_sort(t_stacks *stacks)
 		stacks_rot(stacks);
 		push_lst(&stacks->a, &stacks->b, "b to a", 'a');
 	}
-	move_stacks(&stacks->a, &stacks->b, best_b_rot(&stacks->a,
-		get_min(&stacks->a)), 'a');
+	move_stacks(&stacks->a, &stacks->b, get_min_rot(&stacks->a,
+				get_min(&stacks->a)), 'a');
 }

@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 15:00:49 by wta               #+#    #+#             */
-/*   Updated: 2019/01/06 04:59:40 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 08:00:25 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ void		print_list(t_lst *lst, char c);
 void		ft_delsplit(char **split);
 void		small_sort(t_lst *b, char c);
 int			add_to_stack(t_lst *a, char **split);
-int			do_op(t_stacks *stacks);
+void		do_op(t_stacks *stacks, t_lst *op, int flag);
 int			is_sort(t_lst *b);
 int			is_num(char *str);
 int			is_sort_from_h(t_lst *b);
 int			get_max(t_lst *b);
+int			get_min(t_lst *a);
 int			d_from_max(t_lst *b, int value);
 void		move_stacks(t_lst *a, t_lst *b, int len, char c);
 int			best_b_rot(t_lst *b, int value);
@@ -39,5 +40,7 @@ void		set_opti_rot(t_stacks *stacks, char *str, int i, int j);
 int			fit_in_a(int value, t_node *node);
 void		get_opti_rot(t_stacks *stacks, char *str, int i, int j);
 void		double_rot(t_stacks *stacks);
+void		visu(t_stacks *stacks, char *str, int max);
+char		*create_line(t_stacks *stacks, int max);
 
 #endif

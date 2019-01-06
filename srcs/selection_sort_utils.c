@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 01:04:11 by wta               #+#    #+#             */
-/*   Updated: 2019/01/06 01:09:26 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 06:42:51 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,16 @@ int		get_max(t_lst *b)
 {
 	t_node	*node;
 	int		value;
+	int		i;
 
+	i = -1;
 	node = b->head;
 	value = node->value;
-	while (value < node->prev->value)
+	while (++i < b->len)
 	{
-		node = node->prev;
-		value = node->value;
+		if (value < node->value)
+			value = node->value;
+		node = node->next;
 	}
 	return (value);
 }

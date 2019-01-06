@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 01:14:56 by wta               #+#    #+#             */
-/*   Updated: 2018/12/02 16:49:22 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 06:34:17 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		ft_parse_mod(t_lpf *node, char *fmt)
 
 void	ft_parse_opt(t_lpf *node, char *fmt, int *index, va_list ap)
 {
-	if (fmt[*index] == '*')
+	if (fmt[*index] == '*' && fmt[*index - 1] != '.')
 		node->width = va_arg(ap, int);
 	if (fmt[*index] == '#')
 		node->flag |= SHARP;
@@ -54,7 +54,8 @@ char	ft_parse_flag(t_lpf *node, char *fmt, int *index, va_list ap)
 		if (fmt[*index] == '.')
 		{
 			node->flag |= ACC;
-			node->acc = ft_atoi(&fmt[*index + 1]);
+			node->acc = (fmt[*index + 1] == '*') ? va_arg(ap, int)
+				: ft_atoi(&fmt[*index + 1]);
 		}
 		if (fmt[*index] == '0' && node->width == 0)
 			node->flag |= ZERO;
