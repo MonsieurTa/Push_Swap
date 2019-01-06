@@ -6,7 +6,7 @@
 #    By: wta <marvin@42.fr>                         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/06 09:33:53 by wta               #+#    #+#              #
-#    Updated: 2019/01/06 10:23:21 by wta              ###   ########.fr        #
+#    Updated: 2019/01/06 10:41:20 by wta              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # ====================================================================== COLOR #
@@ -25,7 +25,7 @@ INCDIR		=	includes
 OBJDIR		=	objs
 OBJ			=	$(addprefix $(OBJDIR)/,$(SRCS:.c=.o))
 CC			=	gcc
-INC			=	-I $(INCDIR) -I .
+INC			=	-I $(INCDIR)
 CFLAGS		=	-Wall -Wextra -Werror
 CHECKERMAIN	=	\
 checker.c
@@ -34,6 +34,7 @@ push_swap.c
 CHECKEROBJ	=	$(addprefix $(OBJDIR)/, $(CHECKERMAIN:.c=.o))
 PSOBJ		=	$(addprefix $(OBJDIR)/, $(PSMAIN:.c=.o))
 SRCS		=			\
+checker_utils.c			\
 do_op.c					\
 insertion_sort.c		\
 insertion_sort_utils.c	\

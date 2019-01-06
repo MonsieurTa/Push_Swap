@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 21:00:25 by wta               #+#    #+#             */
-/*   Updated: 2019/01/06 09:59:52 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 10:32:48 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,22 @@ void	do_rot(t_stacks *stacks, t_node *op)
 		rrev_rot(&stacks->a, &stacks->b, "");
 }
 
+void	show_visu(t_stacks *stacks, char *line, int max, int last)
+{
+	if (last == 1)
+	{
+		system("clear");
+		visu(stacks, line, max);
+		ft_strdel(&line);
+	}
+	else
+	{
+		system("clear");
+		visu(stacks, line, max);
+		usleep(1000 * 25);
+	}
+}
+
 void	do_op(t_stacks *stacks, t_lst *op, int flag)
 {
 	t_node	*node;
@@ -60,20 +76,12 @@ void	do_op(t_stacks *stacks, t_lst *op, int flag)
 	while (idx < op->len)
 	{
 		if (flag == 1)
-		{
-			system("clear");
-			visu(stacks, line, max);
-			usleep(1000 * 25);
-		}
+			show_visu(stacks, line, max, 0);
 		do_push_n_swap(stacks, node);
 		do_rot(stacks, node);
 		node = node->next;
 		idx++;
 	}
 	if (flag == 1)
-	{
-		system("clear");
-		visu(stacks, line, max);
-		ft_strdel(&line);
-	}
+		show_visu(stacks, line, max, 1);
 }

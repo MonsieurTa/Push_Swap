@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 15:00:49 by wta               #+#    #+#             */
-/*   Updated: 2019/01/06 09:59:30 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 10:36:35 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,7 @@ void		get_opti_rot(t_stacks *stacks, char *str, int i, int j);
 void		double_rot(t_stacks *stacks);
 void		visu(t_stacks *stacks, char *str, int max);
 char		*create_line(int max);
+int			check_stacks(t_stacks *stacks);
+int			get_push_n_swap(t_lst *op, char *line);
 
 #endif

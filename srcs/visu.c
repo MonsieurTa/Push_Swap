@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 05:58:14 by wta               #+#    #+#             */
-/*   Updated: 2019/01/06 09:57:18 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 10:29:25 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	visu(t_stacks *stacks, char *str, int max)
 {
 	t_node	*node_a;
 	t_node	*node_b;
-	int	i;
+	int		i;
 
 	node_a = stacks->a.head;
 	node_b = stacks->b.head;
@@ -42,7 +42,8 @@ void	visu(t_stacks *stacks, char *str, int max)
 		if (i < stacks->a.len && node_a->value >= 0)
 			ft_printf("\e[0;32m%-*.*s\e[1;37m ", max, node_a->value, str);
 		else if (i < stacks->a.len && node_a->value < 0)
-			ft_printf("\e[0;31m%-*.*s\e[1;37m ", max, ft_abs(node_a->value), str);
+			ft_printf("\e[0;31m%-*.*s\e[1;37m ", max,
+					ft_abs(node_a->value), str);
 		else
 			ft_printf("%*s ", max, "");
 		if (i < stacks->b.len && node_b->value >= 0)

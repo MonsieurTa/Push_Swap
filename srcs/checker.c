@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 16:48:26 by wta               #+#    #+#             */
-/*   Updated: 2019/01/06 09:53:39 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 10:43:17 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,6 @@
 #include "link_list.h"
 #include "push_swap.h"
 #include "operations.h"
-
-int		check_stacks(t_stacks *stacks)
-{
-	if (stacks->b.head == NULL)
-	{
-		if (is_sort(&stacks->a) == 1)
-		{
-			ft_printf("OK\n");
-			return (1);
-		}
-	}
-	return (0);
-}
-
-int		get_push_n_swap(t_lst *op, char *line)
-{
-	t_node	*node;
-
-	node = NULL;
-	if (ft_strequ(line, "pa") == 1 && (node = newnode(0)) != NULL)
-		pushback(op, node);
-	else if (ft_strequ(line, "pb") == 1 && (node = newnode(1)) != NULL)
-		pushback(op, node);
-	else if (ft_strequ(line, "sa") == 1 && (node = newnode(2)) != NULL)
-		pushback(op, node);
-	else if (ft_strequ(line, "sb") == 1 && (node = newnode(3)) != NULL)
-		pushback(op, node);
-	else if (ft_strequ(line, "ss") == 1 && (node = newnode(4)) != NULL)
-		pushback(op, node);
-	return (node != NULL);
-}
 
 int		get_rot(t_lst *op, char *line)
 {
@@ -71,7 +40,7 @@ int		get_op(t_lst *op)
 {
 	char	*line;
 	int		gnl_ret;
-	
+
 	init_lst(op);
 	while ((gnl_ret = get_next_line(0, &line)) > 0)
 	{
@@ -114,7 +83,7 @@ int		check_opt(int ac, char **av)
 		if (ft_strequ(av[1], "-v") == 1)
 		{
 			ft_putstr_fd("usage: ./checker [-v] [...]\n", 2);
-				return (0);
+			return (0);
 		}
 	}
 	if (ac > 2)
@@ -142,7 +111,7 @@ int		main(int ac, char **av)
 			while (ret == 1 && idx < ac)
 			{
 				if ((split = ft_strsplit(av[idx], ' ')) != NULL
-				&& add_to_stack(&stacks.a, split) == 0)
+						&& add_to_stack(&stacks.a, split) == 0)
 					ret = 0;
 				else if (split == NULL)
 					ret = 0;
