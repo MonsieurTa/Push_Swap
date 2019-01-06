@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 15:00:49 by wta               #+#    #+#             */
-/*   Updated: 2019/01/06 08:00:25 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 09:59:30 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ int			d_from_max(t_lst *b, int value);
 void		move_stacks(t_lst *a, t_lst *b, int len, char c);
 int			best_b_rot(t_lst *b, int value);
 int			fit_in(int value_a, t_node *node_b);
-int			best_a_rot(t_lst *a, t_lst *b, int value);
+int			best_a_rot(t_lst *a, t_lst *b);
 int			opti_rot(t_lst *stack, int rot);
 void		set_opti_rot(t_stacks *stacks, char *str, int i, int j);
 int			fit_in_a(int value, t_node *node);
 void		get_opti_rot(t_stacks *stacks, char *str, int i, int j);
 void		double_rot(t_stacks *stacks);
 void		visu(t_stacks *stacks, char *str, int max);
-char		*create_line(t_stacks *stacks, int max);
+char		*create_line(int max);
 
 #endif

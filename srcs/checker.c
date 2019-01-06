@@ -6,7 +6,7 @@
 /*   By: wta <wta@student.41.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 16:48:26 by wta               #+#    #+#             */
-/*   Updated: 2019/01/06 07:58:26 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 09:53:39 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int		get_rot(t_lst *op, char *line)
 
 int		get_op(t_lst *op)
 {
-	t_node	*node;
 	char	*line;
 	int		gnl_ret;
 	
@@ -100,14 +99,9 @@ void	check_all(t_stacks *stacks, t_lst *op, int ret, char *flag)
 		ft_putstr_fd("Error\n", 2);
 		return ;
 	}
-	if (v == 0 || (v == 1 && get_min(&stacks->a) >= 0))
-	{
-		do_op(stacks, op, v == 1);
-		if (check_stacks(stacks) == 0)
-			ft_printf("KO\n");
-	}
-	else
-		ft_putstr_fd("Can't use -v with negative numbers\n", 2);
+	do_op(stacks, op, v == 1);
+	if (check_stacks(stacks) == 0)
+		ft_printf("KO\n");
 	rm_lst(&stacks->a);
 	rm_lst(&stacks->b);
 	rm_lst(op);

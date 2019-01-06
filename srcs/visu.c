@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 05:58:14 by wta               #+#    #+#             */
-/*   Updated: 2019/01/06 06:52:20 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 09:57:18 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../libft/includes/libft.h"
 #include "link_list.h"
 
-char	*create_line(t_stacks *stacks, int max)
+char	*create_line(int max)
 {
 	char	*line;
 	int		i;
@@ -39,17 +39,19 @@ void	visu(t_stacks *stacks, char *str, int max)
 	i = -1;
 	while (++i < stacks->a.len + stacks->b.len)
 	{
-		if (i < stacks->a.len)
-			ft_printf("%-*.*s ", max, node_a->value, str);
+		if (i < stacks->a.len && node_a->value >= 0)
+			ft_printf("\e[0;32m%-*.*s\e[1;37m ", max, node_a->value, str);
+		else if (i < stacks->a.len && node_a->value < 0)
+			ft_printf("\e[0;31m%-*.*s\e[1;37m ", max, ft_abs(node_a->value), str);
 		else
 			ft_printf("%*s ", max, "");
-		if (i < stacks->b.len)
-			ft_printf("%.*s\n", node_b->value, str);
+		if (i < stacks->b.len && node_b->value >= 0)
+			ft_printf("\e[0;32m%-*.*s\e[1;37m\n", max, node_b->value, str);
+		else if (i < stacks->b.len && node_b->value < 0)
+			ft_printf("\e[0;31m%.*s\e[1;37m\n", ft_abs(node_b->value), str);
 		else
 			ft_putchar('\n');
-		if (i < stacks->a.len)
-			node_a = node_a->next;
-		if (i < stacks->b.len)
-			node_b = node_b->next;
+		node_a = (i < stacks->a.len) ? node_a->next : node_a;
+		node_b = (i < stacks->b.len) ? node_b->next : node_b;
 	}
 }

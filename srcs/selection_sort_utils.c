@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 01:04:11 by wta               #+#    #+#             */
-/*   Updated: 2019/01/06 06:42:51 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 09:54:18 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int		best_b_rot(t_lst *b, int value)
 {
 	int	opti;
 	int	len;
-	int	mid;
 
 	len = d_from_max(b, value) - d_from_max(b, b->head->value);
 	opti = (len < 0) ? b->len - ft_abs(len) : len - b->len;

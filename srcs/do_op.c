@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 21:00:25 by wta               #+#    #+#             */
-/*   Updated: 2019/01/06 07:40:59 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 09:59:52 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	do_op(t_stacks *stacks, t_lst *op, int flag)
 	node = op->head;
 	idx = 0;
 	max = get_max(&stacks->a);
-	if ((flag == 1 && (line = create_line(stacks, max)) == NULL))
+	if ((flag == 1 && (line = create_line(max)) == NULL))
 		return ;
 	while (idx < op->len)
 	{
@@ -63,7 +63,7 @@ void	do_op(t_stacks *stacks, t_lst *op, int flag)
 		{
 			system("clear");
 			visu(stacks, line, max);
-			usleep(1000 * 50);
+			usleep(1000 * 25);
 		}
 		do_push_n_swap(stacks, node);
 		do_rot(stacks, node);

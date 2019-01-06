@@ -6,7 +6,7 @@
 /*   By: wta <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 01:05:33 by wta               #+#    #+#             */
-/*   Updated: 2019/01/06 03:10:03 by wta              ###   ########.fr       */
+/*   Updated: 2019/01/06 09:55:02 by wta              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		fit_in(int value_a, t_node *node_b)
 	return (0);
 }
 
-int		best_a_rot(t_lst *a, t_lst *b, int value)
+int		best_a_rot(t_lst *a, t_lst *b)
 {
 	t_node	*node;
 	int		len;
